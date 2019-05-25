@@ -5,13 +5,12 @@ using Renter.Infrastructure.Services.Interfaces;
 
 namespace Renter.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    [Route("[controller]")]
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public UsersController(IUserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
