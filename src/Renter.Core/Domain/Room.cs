@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Renter.Core.Enums;
 
 namespace Renter.Core.Domain
 {
-    public class Room
+    public class Room // ValueObject
     {
-        public Guid Id { get; protected set; }
-
         public double Size { get; protected set; }
 
-        public string RoomType { get; protected set; } // single, double, etc -> enum
+        public RoomType RoomType { get; protected set; }
 
         public List<string> Photos { get; protected set; }
     }

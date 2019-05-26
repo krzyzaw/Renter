@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Renter.Core.Domain;
 
 namespace Renter.Core.Repositories
 {
     public interface IUserRepository
     {
-        User Get(Guid id);
+        Task<User> GetAsync(Guid id);
 
-        User Get(string email);
+        Task<User> GetAsync(string email);
 
-        IEnumerable<User> GetAll();
+        Task<IEnumerable<User>> GetAllAsync();
 
-        void Add(User user);
+        Task AddAsync(User user);
 
-        void Update(User user);
+        Task UpdateAsync(User user);
 
-        void Remove(Guid id);
+        Task RemoveAsync(Guid id);
     }
 }

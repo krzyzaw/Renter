@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using Renter.Infrastructure.DTO;
 
 namespace Renter.Infrastructure.Services.Interfaces
 {
     public interface IUserService
     {
-        UserDto Get(string email);
+        Task<UserDto> GetAsync(string email);
 
-        void Register(string email, string username, string password);
+        Task RegisterAsync(string email, string username, string password);
     }
 }

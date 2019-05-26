@@ -1,6 +1,6 @@
 ﻿namespace Renter.Core.Domain
 {
-    public class Address
+    public class Address // ValueObject
     {
         public string ZipCode { get; protected set; }
 

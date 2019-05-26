@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Renter.Core.Enums;
 
 namespace Renter.Core.Domain
 {
@@ -7,7 +8,7 @@ namespace Renter.Core.Domain
     {
         public Guid Id { get; protected set; }
 
-        public string BuildingType { get; protected set; } // enum -> apartment, block, etc
+        public BuildingType BuildingType { get; protected set; }
 
         public string Name { get; protected set; }
 
