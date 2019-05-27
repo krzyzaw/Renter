@@ -3,19 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using Renter.Infrastructure.Commands;
 using Renter.Infrastructure.Commands.Users;
 using Renter.Infrastructure.Services.Interfaces;
-using Renter.Infrastructure.Settings;
 
 namespace Renter.Api.Controllers
 {
     public class UserController : ApiControllerBase
     {
         private readonly IUserService _userService;
-        private readonly GeneralSettings _generalSettings;
 
-        public UserController(ICommandDispatcher commandDispatcher, IUserService userService, GeneralSettings generalSettings) : base(commandDispatcher)
+        public UserController(ICommandDispatcher commandDispatcher,
+            IUserService userService) : base(commandDispatcher)
         {
             _userService = userService;
-            _generalSettings = generalSettings;
         }
 
         [HttpGet("{email}")]
