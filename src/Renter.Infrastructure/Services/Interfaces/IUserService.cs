@@ -3,7 +3,7 @@ using Renter.Infrastructure.DTO;
 
 namespace Renter.Infrastructure.Services.Interfaces
 {
-    public interface IUserService
+    public interface IUserService : IService
     {
         Task<UserDto> GetAsync(string email);
 

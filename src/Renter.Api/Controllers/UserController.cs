@@ -10,7 +10,8 @@ namespace Renter.Api.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(ICommandDispatcher commandDispatcher, IUserService userService) : base(commandDispatcher)
+        public UserController(ICommandDispatcher commandDispatcher,
+            IUserService userService) : base(commandDispatcher)
         {
             _userService = userService;
         }
