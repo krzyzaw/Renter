@@ -5,7 +5,7 @@ using Renter.Core.Domain;
 
 namespace Renter.Core.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository
     {
         Task<User> GetAsync(Guid id);
 
