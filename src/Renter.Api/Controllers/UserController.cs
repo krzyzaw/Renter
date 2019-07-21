@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Renter.Infrastructure.Commands;
 using Renter.Infrastructure.Commands.Users;
 using Renter.Infrastructure.Services.Interfaces;
@@ -11,7 +14,7 @@ namespace Renter.Api.Controllers
         private readonly IUserService _userService;
 
         public UserController(ICommandDispatcher commandDispatcher,
-            IUserService userService) : base(commandDispatcher)
+            IUserService userService, IMemoryCache cache) : base(commandDispatcher)
         {
             _userService = userService;
         }
@@ -19,6 +22,7 @@ namespace Renter.Api.Controllers
         [HttpGet("{email}")]
         public async Task<IActionResult> Get(string email)
         {
+           // throw new Exception("Ups...");
             var user = await _userService.GetAsync(email);
             if (user == null)
             {
@@ -28,12 +32,13 @@ namespace Renter.Api.Controllers
             return Json(user);
         }
 
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateUser command)
+        public async Task<IActionResult> Post([FromBody]CreateUser command)
         {
-            await CommandDispatcher.DispatchAsync(command);
+            await DispatchAsync(command);
 
-            return Created($"user/{command.Email}", new object());
+            return Created($"user/{command.Email}", null);
         }
     }
 }

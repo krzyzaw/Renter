@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Renter.Infrastructure.DTO;
 
 namespace Renter.Infrastructure.Services.Interfaces
@@ -7,6 +8,8 @@ namespace Renter.Infrastructure.Services.Interfaces
     {
         Task<UserDto> GetAsync(string email);
 
-        Task RegisterAsync(string email, string username, string password);
+        Task RegisterAsync(Guid userId, string email, string username, string password, string role);
+
+        Task LoginAsync(string email, string password);
     }
 }
