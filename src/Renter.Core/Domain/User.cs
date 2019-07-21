@@ -23,18 +23,20 @@ namespace Renter.Core.Domain
 
         public DateTime UpdatedAt { get; protected set; }
 
+        public string Role { get; protected set; }
 
         protected User()
         {
         }
 
-        public User(string email, string username,
-            string password, string salt)
+        public User(Guid userId, string email, string username,
+            string password, string salt, string role)
         {
-            Id = Guid.NewGuid();
+            Id = userId;
             SetEmail(email);
             SetUsername(username);
             SetPassword(password, salt);
+            Role = role;
             CreatedAt = DateTime.UtcNow;
         }
 

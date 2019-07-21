@@ -21,6 +21,7 @@ namespace Renter.Infrastructure.IoC
             builder.RegisterModule<CommandModule>();
             builder.RegisterModule<ServiceModule>();
             builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule<MongoModule>();
             builder.RegisterModule(new SettingsModule(_configuration));
             builder.RegisterInstance(AutoMapperConfig.Initialize()).SingleInstance();
         }

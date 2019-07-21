@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Renter.Infrastructure.Commands;
 using Renter.Infrastructure.Commands.Users;
 using Renter.Infrastructure.Services.Interfaces;
@@ -16,7 +17,8 @@ namespace Renter.Infrastructure.Handlers.Users
 
         public async Task HandleAsync(CreateUser command)
         {
-            await _userService.RegisterAsync(command.Email, command.Username, command.Password);
+            await _userService.RegisterAsync(Guid.NewGuid(), command.Email, 
+                command.Username, command.Password, command.Role);
         }
     }
 }
