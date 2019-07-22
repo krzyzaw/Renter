@@ -12,7 +12,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Renter.Api.Framework;
+using Renter.Api.RabbitMq;
+using Renter.Core.Domain;
 using Renter.Infrastructure.IoC;
+using Renter.Infrastructure.Message.Commands;
 using Renter.Infrastructure.Mongo;
 using Renter.Infrastructure.Services.Interfaces;
 using Renter.Infrastructure.Settings;
@@ -57,6 +60,7 @@ namespace Renter.Api
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
+            builder.AddRabbitMq();
             ApplicationContainer = builder.Build();
 
             return new AutofacServiceProvider(ApplicationContainer);
@@ -78,6 +82,10 @@ namespace Renter.Api
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseRabbitMq()
+                .SubscribeCommand<CreateDiscount>();
+
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }

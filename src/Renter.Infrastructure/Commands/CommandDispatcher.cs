@@ -21,7 +21,7 @@ namespace Renter.Infrastructure.Commands
             }
 
             var handler = _componentContext.Resolve<ICommandHandler<T>>();
-            await handler.HandleAsync(command);
+            await handler.HandleAsync(command, CorrelationContext.Empty);
         }
     }
 }

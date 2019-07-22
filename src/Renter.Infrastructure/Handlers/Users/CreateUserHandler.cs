@@ -15,7 +15,7 @@ namespace Renter.Infrastructure.Handlers.Users
             _userService = userService;
         }
 
-        public async Task HandleAsync(CreateUser command)
+        public async Task HandleAsync(CreateUser command, ICorrelationContext correlationContext)
         {
             await _userService.RegisterAsync(Guid.NewGuid(), command.Email, 
                 command.Username, command.Password, command.Role);

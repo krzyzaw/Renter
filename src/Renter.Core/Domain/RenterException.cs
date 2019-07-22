@@ -6,29 +6,31 @@ namespace Renter.Core.Domain
     {
         public string Code { get; }
 
-        protected RenterException()
+        public RenterException()
         {
         }
 
-        protected RenterException(string code)
+        public RenterException(string code)
         {
             Code = code;
         }
 
-        protected RenterException(string message, params object[] args) : this(string.Empty, message, args)
+        public RenterException(string message, params object[] args)
+            : this(string.Empty, message, args)
         {
         }
 
-        protected RenterException(string code, string message, params object[] args) : this(null, code, message, args)
+        public RenterException(string code, string message, params object[] args)
+            : this(null, code, message, args)
         {
         }
 
-        protected RenterException(Exception innerException, string message, params object[] args)
+        public RenterException(Exception innerException, string message, params object[] args)
             : this(innerException, string.Empty, message, args)
         {
         }
 
-        protected RenterException(Exception innerException, string code, string message, params object[] args)
+        public RenterException(Exception innerException, string code, string message, params object[] args)
             : base(string.Format(message, args), innerException)
         {
             Code = code;

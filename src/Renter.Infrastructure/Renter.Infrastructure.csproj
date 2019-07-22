@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Renter.Core\Renter.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Message\Events\" />
+  </ItemGroup>
+
 </Project>

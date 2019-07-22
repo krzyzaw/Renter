@@ -25,7 +25,7 @@ namespace Renter.Infrastructure.Handlers.Users
         }
 
         //Handler
-        public async Task HandleAsync(Login command)
+        public async Task HandleAsync(Login command, ICorrelationContext correlationContext)
             => await _handler
                 .Run(async () => await _userService.LoginAsync(command.Email, command.Password))
                 .Next()
