@@ -19,6 +19,7 @@ using Renter.Infrastructure.Message.Commands;
 using Renter.Infrastructure.Mongo;
 using Renter.Infrastructure.Services.Interfaces;
 using Renter.Infrastructure.Settings;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Renter.Api
 {
@@ -57,6 +58,11 @@ namespace Renter.Api
                 };
             });
 
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Info{ Title = "Core API", Description = "HMP Core API" });
+            });
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new ContainerModule(Configuration));
@@ -76,6 +82,10 @@ namespace Renter.Api
                 var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
                 dataInitializer.SeedAsync();
             }
+
+            var swaggerSettings = app.ApplicationServices.GetService<SwaggerSettings>();
+            app.UseSwagger();
+            app.UseSwaggerUI(opt => { opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Core API"); });
 
             MongoConfigurator.Initialize();
             app.UseCustomExceptionHandler();

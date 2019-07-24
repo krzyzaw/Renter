@@ -25,6 +25,9 @@ namespace Renter.Infrastructure.IoC.Modules
 
             builder.RegisterInstance(_configuration.GetSettings<MongoSettings>())
                 .SingleInstance();
+
+            builder.RegisterInstance(_configuration.GetSettings<SwaggerSettings>())
+                .SingleInstance();
         }
     }
 }

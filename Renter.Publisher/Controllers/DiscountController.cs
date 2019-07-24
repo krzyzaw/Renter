@@ -1,33 +1,27 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RawRabbit;
+using Renter.Api.Controllers;
 using Renter.Api.Extensions;
 using Renter.Api.RabbitMq;
 using Renter.Infrastructure.Commands;
 using Renter.Infrastructure.Message.Commands;
 
-namespace Renter.Api.Controllers
+namespace Renter.Publisher.Controllers
 {
     public class DiscountController : ApiControllerBase
     {
-        private readonly IBusClient _client;
-
         private readonly IBusPublisher _busPublisher;
 
-        public DiscountController(ICommandDispatcher commandDispatcher, IBusClient client, IBusPublisher busPublisher) 
-            : base(commandDispatcher)
+        public DiscountController(ICommandDispatcher commandDispatcher, IBusPublisher busPublisher) : base(commandDispatcher)
         {
-            _client = client;
             _busPublisher = busPublisher;
         }
 
-        [HttpPost("")]
-        public async Task<ActionResult> Post([FromBody]CreateDiscount command)
-        {
-            await DispatchAsync(command.BindId(x => x.Id));
-            return Accepted();
-        }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]CreateDiscount command)
+            => await SendAsync(command.BindId(c => c.Id).Bind(c => c.CustomerId, UserId),
+                resourceId: command.Id, resource: "discounts");
 
         private async Task<IActionResult> SendAsync<T>(T command,
             Guid? resourceId = null, string resource = "") where T : ICommand

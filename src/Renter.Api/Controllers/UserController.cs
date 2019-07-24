@@ -33,7 +33,7 @@ namespace Renter.Api.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]CreateUser command)
         {
             await DispatchAsync(command);

@@ -23,11 +23,11 @@ namespace Renter.Core.Domain
                     "Invalid discount id.");
             }
 
-            if (customerId == Guid.Empty)
-            {
-                throw new RenterException("invalid_discount_customer_id",
-                    "Invalid discount customers id.");
-            }
+//            if (customerId == Guid.Empty)
+//            {
+//                throw new RenterException("invalid_discount_customer_id",
+//                    "Invalid discount customers id.");
+//            }
 
             if (string.IsNullOrWhiteSpace(code))
             {

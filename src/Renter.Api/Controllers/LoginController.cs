@@ -17,6 +17,7 @@ namespace Renter.Api.Controllers
             _cache = cache;
         }
 
+        [HttpPost("")]
         public async Task<IActionResult> Post([FromBody]Login command)
         {
             command.TokenId = Guid.NewGuid();
